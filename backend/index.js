@@ -1,23 +1,15 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import sequelize from "./config/db.js"; // <--- debe apuntar exactamente al archivo
-import usuarioRoutes from "./routes/usuarioRoutes.js";
+import userRoutes from "./routes/users.js";
+import "./config/db.js";
 
 dotenv.config();
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/api", usuarioRoutes);
 
-const PORT = process.env.PORT || 5000;
+app.use("/api/users", userRoutes);
 
-app.listen(PORT, async () => {
-  try {
-    await sequelize.sync();
-    console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
+app.listen(process.env.PORT, () => console.log(`Servidor corriendo en http://localhost:${process.env.PORT}`));

@@ -1,7 +1,12 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/db.js";
+import sequelize from "../db.js";
 
-const Usuario = sequelize.define("Usuario", {
+const User = sequelize.define("User", {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -15,6 +20,10 @@ const Usuario = sequelize.define("Usuario", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+}, {
+  timestamps: true,
+  createdAt: "created_at",
+  updatedAt: false,
 });
 
-export default Usuario;
+export default User;
